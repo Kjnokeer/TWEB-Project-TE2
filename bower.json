@@ -1,0 +1,14 @@
+{
+  "name": "tweb-project-te2",
+  "version": "0.0.1",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "dependencies": {
+    "angular": "~1.4.8",
+    "bootstrap": "~3.3.6",
+    "angular-ui-router": "~0.2.15"
+  }
+}

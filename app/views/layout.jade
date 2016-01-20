@@ -1,0 +1,50 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width')
+    title= title
+    block css
+      link(rel='stylesheet', href='/css/style.css')
+
+      //- Include bootstrap
+      link(rel='stylesheet', href='/components/bootstrap/dist/css/bootstrap.min.css')
+    block js
+      if ENV_DEVELOPMENT
+        script(src='http://localhost:35729/livereload.js')
+  body(ng-app='twebProjectTE2')
+
+    nav(class='navbar navbar-default navbar-fixed-top')
+      div(class='container')
+        div(class='navbar-header')
+          button(type='button', class='navbar-toggle collapsed', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+            span(class='sr-only') Toggle navigation
+            span(class='icon-bar')
+            span(class='icon-bar')
+            span(class='icon-bar')
+          a(class='navbar-brand', ui-sref='main') TWEB Project - TE2
+        div(id='navbar', class='nabvar-collapse')
+          ul(class='nav navbar-nav')
+            li(ui-sref-active='connect')
+              a(ui-sref='connect') Connect
+            li(ui-sref-active='active')
+              a(ui-sref='board') Board
+            li(ui-sref-active='active')
+              a(ui-sref='debug') Debug
+
+    div(style='height:20px')
+    div(class='container', ng-controller="ProjectCtrl", ui-view)
+      block content
+
+
+    //- Include AngularJS
+    script(src='/components/angular/angular.js')
+
+    //- Include AngularJS app.js
+    script(src='/js/app.js')
+
+    //- Include Project controller
+    script(src='js/ProjectCtrl.js')
+
+    //- Include AngularUI Router
+    script(src='/components/angular-ui-router/release/angular-ui-router.min.js')
