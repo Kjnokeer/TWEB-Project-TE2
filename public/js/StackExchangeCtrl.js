@@ -17,7 +17,9 @@ angular.module('twebProjectTE2')
 
     $http.get('https://api.stackexchange.com/2.2/me?key=' + key + '&access_token=' + userToken + '&site=' + site).then(function successCallback(response) {
       if(response.status == 200) {
-        $scope.userInfos = response.data.items[0];
+        if(response.data.items.length > 0) {
+          $scope.userInfos = response.data.items[0];
+        }
       }
     }, function errorCallback(response) {
       console.log(response);
