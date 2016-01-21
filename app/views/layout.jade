@@ -3,6 +3,7 @@ html(lang='en')
   head
     meta(charset='UTF-8')
     meta(name='viewport', content='width=device-width')
+    base(href='/')
     title= title
     block css
       link(rel='stylesheet', href='/css/style.css')
@@ -28,9 +29,7 @@ html(lang='en')
             li(ui-sref-active='connect')
               a(ui-sref='connect') Connect
             li(ui-sref-active='active')
-              a(ui-sref='board') Board
-            li(ui-sref-active='active')
-              a(ui-sref='debug') Debug
+              a(ui-sref='dashboard') Dashboard
 
     div(style='height:20px')
     div(class='container', ng-controller="ProjectCtrl", ui-view)
