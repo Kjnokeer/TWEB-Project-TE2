@@ -26,16 +26,20 @@ html(lang='en')
           a(class='navbar-brand', ui-sref='main') TWEB Project - TE2
         div(id='navbar', class='nabvar-collapse')
           ul(class='nav navbar-nav')
-            li(ui-sref-active='connect')
-              a(ui-sref='connect') Connect
             li(ui-sref-active='active')
-              a(ui-sref='dashboard') Dashboard
+              a(ui-sref='connect') Connect
+            li(ui-sref-active='active', ng-if="isLogged")
+              a(ui-sref='sites') Sites
+            li(ui-sref-active='active', ng-if="isLogged && site != undefined")
+              a(ui-sref='myProfile') My profile
+            li(ui-sref-active='active', ng-if="isLogged && site != undefined")
+              a(ui-sref='events') Events
 
     div(style='height:20px')
     div(class='container', ng-controller="ProjectCtrl", ui-view)
       block content
-
-
+      
+      
     //- Include AngularJS
     script(src='/components/angular/angular.js')
 
@@ -44,6 +48,9 @@ html(lang='en')
 
     //- Include Project controller
     script(src='js/ProjectCtrl.js')
+
+    //- Include StackExchange controller
+    script(src='js/StackExchangeCtrl.js')
 
     //- Include AngularUI Router
     script(src='/components/angular-ui-router/release/angular-ui-router.min.js')

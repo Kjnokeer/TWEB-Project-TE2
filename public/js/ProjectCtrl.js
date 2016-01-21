@@ -1,5 +1,5 @@
 angular.module('twebProjectTE2')
-  .controller('ProjectCtrl', function($scope, $rootScope, $location, $state, $http, user) {
+  .controller('ProjectCtrl', function($scope, $rootScope, $location, $state, $http, user, stackExchangeInfos) {
     $rootScope.$on('$stateChangeStart', function (event, nextState, currentState) {
       // Check if nextState is connect page and if the user isn't logged in
       if(nextState.name != 'main' && nextState.name != 'connect' && !user.isLogged) {
@@ -9,45 +9,33 @@ angular.module('twebProjectTE2')
       }
     });
 
-    // Function to redirect the user to the StackExchange oauth link
-    $scope.connectToStackExchange = function() {
-      window.location = 'https://stackexchange.com/oauth/dialog?client_id=6320&scope=&redirect_uri=http://127.0.0.1:3000';
-    };
-
     $rootScope.$on('$viewContentLoaded', function(event) {
       var path = $location.path();
       var access_token = getQueryVariable(path, 'access_token');
-      var key = 'jdLx3MZCVUU6IHkZUUoTvg((';
+      stackExchangeInfos.setInfoIfNotExist('userToken', access_token);
+      var key = stackExchangeInfos.getInfo('key');
 
       if(access_token) {
         user.isLogged = true;
+        $rootScope.isLogged = user.isLogged;
 
-        $state.go('dashboard');
+        $state.go('sites');
 
         $http.get('https://api.stackexchange.com/2.2/sites?key=' + key).then(function successCallback(response) {
           if(response.status == 200) {
-            user.availableSites = [];
+            $scope.availableSites = [];
 
             response.data.items.forEach(function(entry) {
-              user.availableSites.push({
+              $scope.availableSites.push({
                 'name' : entry.name,
                 'iconUrl' : entry.icon_url,
                 'apiSiteParameter' : entry.api_site_parameter
               });
             });
-
-            $scope.availableSites = user.availableSites;
           }
         }, function errorCallback(response) {
-          console.log(response);
+          console.log('error: ' + response);
         });
-
-        //'https://api.stackexchange.com/2.2/me?key=U4DMV*8nvpm3EOpvf69Rxw((&site=stackoverflow&order=desc&sort=reputation&access_token=ZTFXq3(RBfSGBYNJsrnT4g))&filter=default'
-        /*$http.get('https://api.stackexchange.com/2.2/me?key=' + key + '&access_token=' + access_token + '&site=stackoverflow').then(function successCallback(response) {
-          console.log(response);
-        }, function errorCallback(response) {
-          console.log(response);
-        });*/
       }
     });
 
@@ -61,5 +49,16 @@ angular.module('twebProjectTE2')
       }
 
       return null;
+    }
+
+    // Function to redirect the user to the StackExchange oauth link
+    $scope.connectToStackExchange = function() {
+      window.location = 'https://stackexchange.com/oauth/dialog?client_id=6320&scope=&redirect_uri=http://127.0.0.1:3000';
+    };
+
+    // Function to choose the site to use
+    $scope.chooseSite = function(siteName) {
+      stackExchangeInfos.setInfoEvenIfExist('site', siteName);
+      $state.go('myProfile');
     }
   });

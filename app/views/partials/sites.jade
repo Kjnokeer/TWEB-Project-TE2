@@ -1,0 +1,10 @@
+div
+  div
+    h2 Which site do you want to use ?
+  table.table-condensed
+    tr(ng-repeat="availableSite in availableSites")
+      td
+        img(src="{{ availableSite.iconUrl }}", style="height: 50px;")
+      td {{ availableSite.name }}
+      td
+        button.btn.btn-success(type='button', ng-click='chooseSite(availableSite.apiSiteParameter);') Choose

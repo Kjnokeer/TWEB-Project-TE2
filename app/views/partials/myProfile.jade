@@ -1,0 +1,29 @@
+div
+  div
+    h2 About yourself
+  div.col-md-8
+    table.table
+      tr
+        td Pseudo
+        td {{ userInfos.display_name }}
+      tr
+        td Age
+        td {{ userInfos.age }}
+      tr
+        td Account date created
+        td {{ userInfos.creation_date * 1000 | date: 'longDate' }}
+      tr
+        td Location
+        td {{ userInfos.location }}
+      tr
+        td Your website URL
+        td {{ userInfos.website_url }}
+      tr
+        td Reputation
+        td {{ userInfos.reputation }} pts
+      tr
+        td Link to your profile
+        td
+          a(href="{{ userInfos.link }}") {{ userInfos.link }}
+  div.col-md-4
+    img(src="{{ userInfos.profile_image }}")
