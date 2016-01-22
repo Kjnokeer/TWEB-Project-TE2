@@ -29,7 +29,7 @@ Il dispose d'une barre de menu en haut de l'application avec une seule options `
 
 Cette page lui permet, après avoir cliqué sur le bouton `StackExchange login`, d'autoriser l'application à connaitre l'impact du compte utilisateur sur le réseau de StackExchange.
 
-D'une fois qu'il a autorisé l'application, il est redirigé sur la vue qui propose la liste des sites accessible depuis l'API de StackExchange. Il est à noter qu'un nouvel onglet est apparu dans le menu, `Sites`, qui permet d'afficher cette vue.
+D'une fois qu'il a autorisé l'application, il est redirigé sur la vue qui propose la liste des sites accessible depuis l'API de StackExchange. Il est à noter qu'un nouvel onglet est apparu dans le menu, `Sites`, qui permet d'afficher cette vue :
 
 <img src="./report/img/3.png">
 
@@ -39,16 +39,20 @@ Après avoir choisi le site à utiliser, l'utilisateur est redirigé sur la vue 
 
 Enfin, la dernière vue, `Events`, permet d'afficher des graphiques contenant les informations prise depuis StackExchange et concernant le site choisi précédemment.
 
-Concernant cette dernière partie, auncun graphique n'est affiché et cette page est, en l'état, inutile. En effet, je n'ai pas réussi à afficher un graphique, même avec les données de base présent sur le site d'Angular Chart.
+Concernant cette dernière partie, aucun graphique n'est affiché et cette page est, en l'état, inutile. En effet, je n'ai pas réussi à afficher un graphique, même avec les données de base présent sur le site d'Angular Chart. C'est une erreur que je ne comprends pas.
 
 ### Endpoints de StackExchange utilisés
 
-Les endpoints suivants ont été utilisés :
+Les endpoints suivants de l'API de StackExchange ont été utilisés :
 
 - */oauth/dialog* => permettant de se connecter et d'autoriser l'application
 - */2.2/sites* => permettant d'obtenir la liste des sites disponibles
 - */2.2/me* => permettant d'obtenir les informations sur l'utilisateur
 - */2.2/events* => permettant d'obtenir la liste des events
+
+### Informations concernant AngularUI Router
+
+J'ai décider de masquer les éléments `Sites`, `My profile` et `Events` du menu tant que l'utilisateur ne s'est pas connecté et n'a pas autorisé l'application. Ainsi que les onglets `My profile` et `Events`, tant qu'il n'a pas choisi un site. Ceci, dans un but de clarté pour l'utilisateur. Il est à noter que des contrôles sont effectués sur les pages masquées qui redirige l'utilisateur sur la vue de connexion (s'il n'est pas connecté). Tout ceci est géré avec AngularJS (et donc du côté client). Il est tout a fait possible de désactiver ces contrôles afin d'accéder aux pages. Je n'ai pas testé le comportement mais une erreur doit certainement être affichée. Évidement, si on voudrais un véritable espace ou une connexion préalable doit être nécessaire, il faudrait effectuer les contrôles de validiter du côté du serveur. Dans mon cas, ce n'est pas nécessaire car ce masquage est juste là pour améliorer le confort de navigation de l'utilisateur et pas pour empêcher un "pirate" d'y accéder.
 
 ## Déploiement sur Heroku
 
