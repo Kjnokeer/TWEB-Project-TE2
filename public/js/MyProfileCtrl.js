@@ -1,5 +1,5 @@
 angular.module('twebProjectTE2')
-  .controller('StackExchangeCtrl', function(stackExchangeInfos, $http, $scope, $rootScope) {
+  .controller('MyProfileCtrl', function(stackExchangeInfos, $http, $scope, $rootScope) {
     $rootScope.site = stackExchangeInfos.getInfo('site');
 
     $rootScope.$on('$stateChangeStart', function (event, nextState, currentState) {

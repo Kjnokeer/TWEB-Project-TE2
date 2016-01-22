@@ -19,12 +19,12 @@ angular.module('twebProjectTE2', [
       .state('myProfile', {
         url: '/myProfile',
         templateUrl: 'views/partials/myProfile.jade',
-        controller: 'StackExchangeCtrl'
+        controller: 'MyProfileCtrl'
       })
       .state('events', {
         url: '/events',
         templateUrl: 'views/partials/events.jade',
-        controller: 'StackExchangeCtrl'
+        controller: 'EventsCtrl'
       });
   })
   .factory('user', function() {
